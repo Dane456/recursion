@@ -6,6 +6,7 @@
 // But instead we're going to implement it from scratch:
 
 
+
 var getElementsByClassName = function(className) {
   
   // your code here
@@ -15,23 +16,22 @@ var getElementsByClassName = function(className) {
 
     var childElement;
 
-    if(element.childElementCount === 0 && element.className === className){
-      return;
-    }
-    //if any children have the classname, dig deeper
-    else if(element.childElementCount > 0){    
-      for(var i=0;i<element.childElementCount;i++){
-        for(var j=0;j<element.children[i].classList.length;j++){
-          if(element.children[i].classList[j] === className){
-            results.push(element.children[i]);
-          }
-        }
-        getChildElements(element.children[i]);
+    for(var j=0;j<element.classList.length;j++){
+      if(element.classList[j] === className){
+        results.push(element);
       }
     }
 
+    if(element.childElementCount === 0 && element.className === className){
+      return;
+    }
+    
+    else if(element.childElementCount > 0){    
+      for(var i=0;i<element.childElementCount;i++){
+        getChildElements(element.children[i]);
+      }
+    }
     return;
-
   };
 
   getChildElements(document.body);
