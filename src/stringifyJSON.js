@@ -28,15 +28,15 @@ var stringifyJSON = function(obj) {
       });
       result += ']';
     }
-    else if(type(item) === 'Number'){
-
+    else{
+    	result += item;
     }
-    else if(type(item) === 'Boolean'){
-      result += item;
-    }
-    else if(type(item) === 'String'){
-      result += item;
-    }
+    // else if(type(item) === 'Boolean'){
+    //   result += item;
+    // }
+    // else if(type(item) === 'String'){
+    //   result += item;
+    // }
 
   };
 
