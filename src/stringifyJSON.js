@@ -5,42 +5,65 @@
 
 var stringifyJSON = function(obj) {
   // your code goes here
-  String.prototype.toString(obj);
   var result = '';
+  var itemNum = 0;
   
   var type = function(input){
     return Object.prototype.toString.call(input).slice(8,-1);
   };
   var stringify = function(item){
-
+    
     if(type(item) === 'Object'){
-
+      var oTemp = '{';
+      var count= 0;
+      for (var prop in item){
+        if(item[prop] !== undefined && type(item[prop])!== 'Function'){
+          if(Object.keys(item).length === 0){
+              oTemp += stringify(prop) + ':' + stringify(item[prop]) ;
+          }
+          else if(count===0){
+            oTemp += stringify(prop) + ':' + stringify(item[prop]);
+          }
+          else{
+            oTemp += "," + stringify(prop) + ':' + stringify(item[prop]);
+          }
+          count++;
+    }
+      }
+      return oTemp + '}';
     }
     else if(type(item) === 'Array'){
-      result += '[';
-      item.forEach(function(arrItem,index){
-        if(index < item.length-1){
-          result += arrItem + ', ';
+      var temp = '[';
+      //result += '[';
+
+      for(var i=0;i<item.length;i++){
+      //item.forEach(function(arrItem,index){
+        if(i < item.length-1){
+          //result += stringify(arrItem) + ',';
+          temp += stringify(item[i]) + ',';
         }
         else{
-          result += arrItem;
+          temp += stringify(item[i]);
         }
-      });
-      result += ']';
+      }
+      temp += ']';
+      return temp;
     }
-    else{
-    	result += item;
+    else if(type(item) === 'Number' || type(item) === 'Boolean' || type(item) === 'Null'){
+      if(itemNum===0){
+        itemNum++;
+        return String(item);
+      }
+      return item;
     }
-    // else if(type(item) === 'Boolean'){
-    //   result += item;
-    // }
-    // else if(type(item) === 'String'){
-    //   result += item;
-    // }
+
+    else if(type(item) === 'String'){
+      return '"' + item + '"';
+    }
 
   };
 
-  stringify(obj);
+  result = stringify(obj);
 
   return result;
 
