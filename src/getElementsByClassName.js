@@ -14,9 +14,9 @@ var getElementsByClassName = function(className) {
   var getChildElements = function(element){
 
     var childElement;
-    console.dir(element.childElementCount);
+
     if(element.childElementCount === 0 && element.className === className){
-      return element;
+      return;
     }
     //if any children have the classname, dig deeper
     else if(element.childElementCount > 0){    
