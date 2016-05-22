@@ -5,4 +5,6 @@
 
 var stringifyJSON = function(obj) {
   // your code goes here
+  String.prototype.toString(obj);
+  console.log(obj;)
 };
